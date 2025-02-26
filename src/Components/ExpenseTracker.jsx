@@ -319,53 +319,37 @@ export default function ExpenseTracker(props) {
             <h3>No expenses created.</h3>
           ) : fetchedDate.activeDateType && fetchedDate.activeDate ? (
             // Case 2: Filter is applied
-            filteredExpenses(fetchedDate.activeDate, fetchedDate.activeDateType)
-              .length > 0 ? (
+            filteredExpenses(fetchedDate.activeDate, fetchedDate.activeDateType).length > 0 ? (
               // Case 2a: Filter applied and matching results found
-              <ol>
-                {filteredExpenses(
-                  fetchedDate.activeDate,
-                  fetchedDate.activeDateType
-                ).map((expense, index) => (
-                  <li
-                    className="my-3"
-                    key={index}
-                    style={{
-                      fontSize: "20px",
-                      width: "60%",
-                      borderBottom: "1px solid #ccc",
-                      paddingBottom: "15px",
-                    }}
-                  >
-                    <div className="container-fluid d-flex justify-content-between align-items-center mt-2">
-                      {expense.expenseName}
+              <ol className="expense-list" style={{ textAlign: "left", paddingLeft: "0" }}>
+                {filteredExpenses(fetchedDate.activeDate, fetchedDate.activeDateType).map((expense, index) => (
+                  <li className="expenseItem my-4 ml-2" key={index}>
+                    {/* Expense Name & Date */}
+                    <div className="container-fluid d-flex justify-content-between align-items-center mt-2 text-start">
+                      <span className="text-break">{expense.expenseName}</span>
                       <span>{expense.expenseDate}</span>
                     </div>
-                    <br />
-                    <div className="container-fluid d-flex justify-content-between align-items-center">
-                      <span>
-                        <strong>Rs. </strong>
-                        {expense.expenseAmount}
-                      </span>
-                      <div className="d-flex justify-content-center">
-                        <span className="d-flex justify-content-center align-items-center badge badge-info mr-3">
-                          {expense.expenseCategory}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => removeParticularElementFromList(index)}
-                          className="btn btn-danger"
-                        >
-                          Remove Expense
-                        </button>
-                      </div>
+
+                    {/* Expense Amount */}
+                    <div className="container-fluid mt-2 text-start">
+                      <span><strong>Rs. </strong>{expense.expenseAmount}</span>
+                    </div>
+
+                    {/* Expense Category & Remove Button */}
+                    <div className="container-fluid d-flex justify-content-between align-items-center gap-2 mt-2">
+                      <span className="badge bg-info text-white px-2 py-2">{expense.expenseCategory}</span>
+
+                      <button type="button" onClick={() => removeParticularElementFromList(index)}
+                        className="btn btn-danger px-2 py-1">
+                        Remove Expense
+                      </button>
                     </div>
                   </li>
                 ))}
               </ol>
             ) : (
               // Case 2b: Filter applied but no matching results
-              <h3>
+              <h3 className="text-center">
                 No expenses found for{" "}
                 {fetchedDate.activeDateType === "week"
                   ? fetchedDate.activeDate // Show week range directly
