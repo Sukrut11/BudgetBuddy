@@ -29,3 +29,19 @@
 .small {
   font-size: 0.75rem;
 }
+
+.expenseItem {
+  font-size: 20px;
+  width: 100%; /* Default full width for mobile */
+  max-width: 60%; /* Restrict width to 60% on larger screens */
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-left: 0; /* Align to left */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {  /* Targets mobile screens */
+  .expenseItem {
+    max-width: 100%; /* Full width on smaller screens */
+  }
+}
