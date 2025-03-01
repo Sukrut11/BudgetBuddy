@@ -220,9 +220,14 @@ export default function ExpenseTracker(props) {
     }
   };
 
-  expenseListArrayContents.map((expense) => {
-    console.log(expense);
-  });
+  // To display total expense Amount to user
+  const [totalExpense, setTotalExpense] = useState(0)
+  useEffect(() => {
+    const expensesToConsider = (fetchedDate.activeDate && fetchedDate.activeDateType) ? filteredExpenses(fetchedDate.activeDate, fetchedDate.activeDateType) : expenseListArrayContents
+    const totalExpenseAmount = expensesToConsider.map((expense) => Number(expense.expenseAmount))
+      .reduce((sum, amount) => sum + amount, 0)
+    setTotalExpense(totalExpenseAmount)
+  }, [expenseListArrayContents, fetchedDate])
 
   return (
     <>
@@ -387,6 +392,7 @@ export default function ExpenseTracker(props) {
             </ol>
           )}
         </div>
+        <h3>Total spending amount: {totalExpense}</h3>
       </div>
     </>
   );
