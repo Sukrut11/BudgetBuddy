@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FilterExpenseComponent from "./FilterExpenseComponent";
+import Alert from "./Alert";
 
 export default function ExpenseTracker(props) {
   const [expenseDetails, createExpenseDetails] = useState({
@@ -51,7 +52,7 @@ export default function ExpenseTracker(props) {
       expenseDetails.expenseCategory === "" ||
       expenseDetails.expenseDate === ""
     ) {
-      alert("Please complete all input fields.");
+      showAlert("danger", "Please complete all input fields.");
       return;
     }
 
@@ -74,6 +75,8 @@ export default function ExpenseTracker(props) {
       expenseCategory: "Personal Expense",
       expenseDate: "",
     });
+
+    showAlert("success", "Your expense has been added.")
   };
 
   const handleExpenseInputChange = (event) => {
@@ -89,6 +92,7 @@ export default function ExpenseTracker(props) {
     updateExpenseListArrayContents((prevContentsOfArray) =>
       prevContentsOfArray.slice(0, -1)
     );
+    showAlert("success", "Your latest expense has been removed.")
   };
 
   // Remove particular expense from list
@@ -96,6 +100,7 @@ export default function ExpenseTracker(props) {
     updateExpenseListArrayContents((prevContentsOfArray) =>
       prevContentsOfArray.filter((_, index) => index !== indexOfExpense)
     );
+    showAlert("success", "Selected expense has been removed.")
   };
 
   // Format date into desired format eg - 07 Jan 25
@@ -113,25 +118,25 @@ export default function ExpenseTracker(props) {
     setFetchedDate({ activeDateType, activeDate });
   };
 
+  // Month Name object
+  const monthNames = {
+    "Jan": 0,
+    "Feb": 1,
+    "Mar": 2,
+    "Apr": 3,
+    "May": 4,
+    "Jun": 5,
+    "Jul": 6,
+    "Aug": 7,
+    "Sep": 8,
+    "Oct": 9,
+    "Nov": 10,
+    "Dec": 11,
+  };
+
   // Filter logic for Expense Details
   const filteredExpenses = (fetchedDate, fetchedDateType) => {
     let formattedFetchedDate = fetchedDate;
-
-    // Month Name object
-    const monthNames = {
-      Jan: 0,
-      Feb: 1,
-      Mar: 2,
-      Apr: 3,
-      May: 4,
-      Jun: 5,
-      Jul: 6,
-      Aug: 7,
-      Sep: 8,
-      Oct: 9,
-      Nov: 10,
-      Dec: 11,
-    };
 
     // Only format fetchedDate for day, month, and year
     if (["day", "year"].includes(fetchedDateType)) {
@@ -229,12 +234,43 @@ export default function ExpenseTracker(props) {
     setTotalExpense(totalExpenseAmount)
   }, [expenseListArrayContents, fetchedDate])
 
+  // to show alert when user selects any filter
+  useEffect(() => {
+    if (fetchedDate.activeDate && fetchedDate.activeDateType === "day") {
+      showAlert("success", `Filter has been set for ${formatDate(fetchedDate.activeDate)}`);
+    }
+    else if (fetchedDate.activeDate && fetchedDate.activeDateType === "week") {
+      showAlert("success", `Filter has been set for ${fetchedDate.activeDate}`);
+    }
+
+    else if (fetchedDate.activeDate && fetchedDate.activeDateType === "month") {
+      const selectedMonth = Object.keys(monthNames)[fetchedDate.activeDate];
+      const currentYear = new Date().getFullYear().toString();
+      showAlert("success", `Filter has been set for ${selectedMonth} ${currentYear}`);
+    }
+
+    else if (fetchedDate.activeDate && fetchedDate.activeDateType === "year") {
+      showAlert("success", `Filter has been set for ${fetchedDate.activeDate}`);
+    }
+  }, [fetchedDate])
+
+  // alert toast code
+  const [alert, setAlert] = useState(null)
+
+  const showAlert = (type, message) => {
+    setAlert({
+      type: type,
+      message: message
+    })
+  }
+
   return (
     <>
-      <h3 className="heading my-3" align="center">
-        {props.expenseTrackerHeading}
-      </h3>
       <div className="container my-3">
+        <Alert alert={alert} />
+        <h3 className="heading my-3" align="center">
+          {props.expenseTrackerHeading}
+        </h3>
         <form>
           <div className="form-group">
             <label htmlFor="exampleFormControlInput1">Expense Name: </label>
@@ -313,6 +349,7 @@ export default function ExpenseTracker(props) {
             onClick={(event) => {
               event.preventDefault();
               clearFilterValues();
+              showAlert("success", "Date filter has been cleared.")
             }}
           >
             Clear Filter
@@ -321,7 +358,7 @@ export default function ExpenseTracker(props) {
         <div className="expensesList">
           {expenseListArrayContents.length === 0 ? (
             // Case 1: No expenses have been added at all
-            <h3>No expenses created.</h3>
+            <h3 className="my-2">No expenses created.</h3>
           ) : fetchedDate.activeDateType && fetchedDate.activeDate ? (
             // Case 2: Filter is applied
             filteredExpenses(fetchedDate.activeDate, fetchedDate.activeDateType).length > 0 ? (
@@ -354,12 +391,16 @@ export default function ExpenseTracker(props) {
               </ol>
             ) : (
               // Case 2b: Filter applied but no matching results
-              <h3 className="text-center">
+              <h3 className="my-2">
                 No expenses found for{" "}
-                {fetchedDate.activeDateType === "week"
-                  ? fetchedDate.activeDate // Show week range directly
-                  : formatDate(fetchedDate.activeDate)}
-                .
+                {fetchedDate.activeDateType === "year"
+                  ? ` year ${fetchedDate.activeDate}` // Show year directly
+                  : fetchedDate.activeDateType === "week"
+                    ? fetchedDate.activeDate // Show week range directly
+                    : fetchedDate.activeDateType === "month"
+                      ? `${Object.keys(monthNames)[fetchedDate.activeDate]} ${new Date().getFullYear()}` // Show month and current year
+                      : formatDate(fetchedDate.activeDate) // Default case for day
+                }.
               </h3>
             )
           ) : (
@@ -392,7 +433,7 @@ export default function ExpenseTracker(props) {
             </ol>
           )}
         </div>
-        <h3>Total spending amount: {totalExpense}</h3>
+        <h3 className="my-4">Total spending amount: {totalExpense}</h3>
       </div>
     </>
   );
