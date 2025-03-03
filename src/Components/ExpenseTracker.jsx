@@ -19,31 +19,6 @@ export default function ExpenseTracker(props) {
     activeDate: "",
   });
 
-  // Helper function to convert "DD MMM YY" to "YYYY-MM-DD"
-  const convertExpenseDate = (formattedDate) => {
-    const [day, monthShort, yearShort] = formattedDate.split(" ");
-    const monthNames = {
-      Jan: "0",
-      Feb: "1",
-      Mar: "2",
-      Apr: "3",
-      May: "4",
-      Jun: "5",
-      Jul: "6",
-      Aug: "7",
-      Sep: "8",
-      Oct: "9",
-      Nov: "10",
-      Dec: "11",
-    };
-
-    const year = `20${yearShort}`; // Convert "YY" to "YYYY"
-    const month = monthNames[monthShort];
-    const dayPadded = day.padStart(2, "0"); // Ensure day is two digits
-
-    return `${year}-${month}-${dayPadded}`;
-  };
-
   const addExpenseDetails = () => {
     // Ensure all fields are filled out
     if (
@@ -77,6 +52,19 @@ export default function ExpenseTracker(props) {
     });
 
     showAlert("success", "Your expense has been added.")
+
+    // Show warning toast to user if he is creating expense while having an active filter.
+    // Check if any date filter is currently active
+    if (fetchedDate.activeDate && fetchedDate.activeDateType) {
+      const currentFilteredExpenses = filteredExpenses(fetchedDate.activeDate, fetchedDate.activeDateType)
+      const isExpenseApplicableInFilter = currentFilteredExpenses.some(
+        (expense) => {
+          expense.expenseDate === formattedDetails.expenseDate
+        })
+      if (!isExpenseApplicableInFilter) {
+        showAlert("warning", "New expense added but it's outside the current filter. Please clear filter to view all expenses.")
+      }
+    }
   };
 
   const handleExpenseInputChange = (event) => {
