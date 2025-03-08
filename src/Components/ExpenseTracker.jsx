@@ -11,7 +11,7 @@ export default function ExpenseTracker(props) {
   });
 
   const [expenseListArrayContents, updateExpenseListArrayContents] = useState(
-    []
+    JSON.parse(localStorage.getItem("expenses")) || []
   );
 
   const [fetchedDate, setFetchedDate] = useState({
@@ -251,6 +251,17 @@ export default function ExpenseTracker(props) {
       message: message
     })
   }
+
+  // Load data from localStorage on mount
+  useEffect(() => {
+    const savedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    updateExpenseListArrayContents(savedExpenses);
+  }, []);
+
+  // Save expenses to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenseListArrayContents));
+  }, [expenseListArrayContents]);
 
   return (
     <>
