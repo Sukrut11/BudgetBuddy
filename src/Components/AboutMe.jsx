@@ -33,13 +33,13 @@ export default function AboutMe() {
                     <strong>Removing an Expense:</strong> Click on the 
                     <span className="text-red-600 font-semibold"> Delete</span> button to remove an unwanted expense.
                     <br />
-                    <span className="text-sm text-gray-500"><strong className="text-red-600">Note:</strong> This action cannot be undone!</span>
+                    <span className="text-sm text-gray-500"><strong className="text-red-600" style={{color: "red"}}>Note:</strong> This action cannot be undone!</span>
                 </li>
                 <li>
                     <strong>Clearing All Expenses:</strong> If you wish to start fresh, you can delete all expenses with the
                     <span className="text-red-600 font-semibold"> Clear All</span> button.
                     <br />
-                    <span className="text-sm text-gray-500"><strong className="text-red-600">Note:</strong> This will permanently remove all recorded expenses.</span>
+                    <span className="text-sm text-gray-500"><strong className="text-red-600" style={{color: "red"}}>Note:</strong> This will permanently remove all recorded expenses.</span>
                 </li>
             </ul>
 
@@ -80,5 +80,5 @@ export default function AboutMe() {
                 <strong className="block text-gray-900 font-bold text-xl">Sukrut Mayekar</strong>
             </p>
         </div>
-    );
+    );  
 }

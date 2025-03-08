@@ -266,8 +266,8 @@ export default function ExpenseTracker(props) {
   return (
     <>
       <div className="container my-3">
-        <Alert alert={alert} />
-        <h3 className="heading my-3" align="center">
+        <Alert alert={alert} style={{minHeight: 65}}  />
+        <h3 className="heading my-3" style={{marginTop: 1000}} align="center">
           {props.expenseTrackerHeading}
         </h3>
         <form>
