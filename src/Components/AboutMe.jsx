@@ -2,50 +2,58 @@ import React from "react";
 
 export default function AboutMe() {
     return (
-        <div className="max-w-2xl mx-auto px-8" style={{ marginTop: 70, paddingLeft: 115, paddingRight: 115 }}>
+        <div className="container max-w-2xl mx-auto p-6" style={{ marginTop: 70 }}>
             <p className="text-lg font-serif text-gray-800 leading-relaxed">
                 <span className="block mb-2 font-semibold text-xl">Hey there, </span>
-                I am <strong>Sukrut Mayekar</strong>, the creator of this simple and intuitive expense tracker web application.
-                As a passionate software engineer, I love building applications that make daily financial management effortless.
+                I am <strong>Sukrut Mayekar</strong>, and I have brought to you another fun application.
+                This is <strong>BudgetBuddy</strong>, your smart expense tracker. This web application is designed to help you track and manage your expenses efficiently. Whether you want to monitor your spending habits or categorize your expenses, BudgetBuddy makes it easy.
             </p>
 
-            <p className="text-lg font-serif text-gray-800 leading-relaxed mt-4">
-                While managing my own finances, I realized the importance of tracking expenses efficiently.
-                So, I created <strong>BudgetBuddy</strong>, an easy-to-use expense tracker that helps users monitor their spending, 
-                set budgets, and gain better control over their financial habits.
-            </p>
-
-            <h3 className="text-xl font-semibold mt-6 text-gray-900">How to Use BudgetBuddy</h3>
-
-            <ul className="list-disc list-inside mt-3 text-lg text-gray-700 leading-relaxed">
-                <li>
-                    <strong>Adding an Expense:</strong> Enter the expense name, amount, and category, then click the
-                    <span className="text-green-600 font-semibold"> Add Expense</span> button.
-                </li>
-                <li>
-                    <strong>Viewing Expenses:</strong> Your expenses will be displayed in a categorized format,
-                    helping you understand your spending patterns.
-                </li>
-                <li>
-                    <strong>Filtering and Sorting:</strong> Easily filter expenses by date, category, or amount to track spending trends.
-                </li>
-                <li>
-                    <strong>Removing an Expense:</strong> Click on the 
-                    <span className="text-red-600 font-semibold"> Delete</span> button to remove an unwanted expense.
-                    <br />
-                    <span className="text-sm text-gray-500"><strong className="text-red-600" style={{color: "red"}}>Note:</strong> This action cannot be undone!</span>
-                </li>
-                <li>
-                    <strong>Clearing All Expenses:</strong> If you wish to start fresh, you can delete all expenses with the
-                    <span className="text-red-600 font-semibold"> Clear All</span> button.
-                    <br />
-                    <span className="text-sm text-gray-500"><strong className="text-red-600" style={{color: "red"}}>Note:</strong> This will permanently remove all recorded expenses.</span>
-                </li>
+            <h3 className="text-xl font-semibold mt-6 text-gray-900">How to use BudgetBuddy</h3>
+            <ul className="list-disc list-inside text-lg text-gray-700 leading-relaxed">
+                <li><strong>Open the Application:</strong> Navigate to the BudgetBuddy website.</li>
+                <li><strong>Home Screen:</strong> You will see a clean interface with a form to input your expenses and options to manage them.</li>
             </ul>
 
-            <h3 className="text-xl font-semibold mt-8 text-gray-900">How to Contact Me</h3>
+            <h2 className="text-xxl font-semibold mt-6 text-gray-900">Adding an Expense</h2>
+            <ul className="list-disc list-inside text-lg text-gray-700 leading-relaxed">
+                <li><strong>Enter Expense Name:</strong> Type the name of the expense (e.g. "1 Liter Milk").</li>
+                <li><strong>Enter Expense Amount:</strong> Enter the amount spent.</li>
+                <li><strong>Select Expense Category:</strong> Choose the appropriate category from the dropdown (e.g., Personal Expense, Food, Travel, etc.).</li>
+                <li><strong>Select Expense Date:</strong> Pick the date of the expense from the date picker.</li>
+                <li><strong>Click "Add Expense":</strong> Your expense will now be recorded and displayed in the expense list.</li>
+            </ul>
+
+            <h2 className="text-xxl font-semibold mt-6 text-gray-900">Managing Expenses</h2>
+            <ul className="list-disc list-inside text-lg text-gray-700 leading-relaxed">
+                <li><strong>Removing an Expense:</strong> Click the "Remove Expense" button next to an entry to delete that expense permanently.</li>
+                <li><strong>Filtering Expenses:</strong> Click "Filter Expense" and select a category from the dropdown to view only those expenses.</li>
+                <li><strong>Clearing the Filter:</strong> Click "Clear Filter" to remove the applied filter and view all recorded expenses.</li>
+            </ul>
+
+
+            <h2 className="text-xl font-semibold mt-6">Viewing Your Expenses</h2>
+            <ul className="list-disc list-inside text-lg text-gray-700 leading-relaxed">
+                <li>All expenses are displayed in a chronological order.</li>
+                <li>The date of the expense is mentioned alongside each entry.</li>
+                <li>The amount is displayed in bold for better visibility.</li>
+                <li>Each expense has a color-coded category label.</li>
+            </ul>
+
+            <h2 className="text-xl font-semibold mt-6">Additional Features</h2>
+            <ul className="list-disc list-inside text-lg text-gray-700 leading-relaxed">
+                <li><strong>User-Friendly Interface:</strong> Simple and intuitive design for hassle-free expense tracking.</li>
+                <li><strong>Expense Categorization:</strong> Helps you analyze spending patterns.</li>
+                <li><strong>Easy Expense Removal:</strong> Delete any unwanted expenses instantly.</li>
+                <li><strong>Filter for Better Analysis:</strong> View specific expense categories quickly.</li>
+            </ul>
+
+            <p className="text-lg font-serif text-gray-800 leading-relaxed mt-6">
+                BudgetBuddy helps you stay on top of your finances with ease. Keep adding and managing your expenses effectively to maintain financial control. I will keep adding more features to BudgetBuddy to make it even better!
+            </p>
+
             <p className="text-lg font-serif text-gray-800 leading-relaxed mt-2">
-                I would love to hear your feedback or collaborate on exciting projects! Feel free to connect with me:
+                Also, I would love to collaborate with you on your project or startup! Feel free to reach out to me via the following platforms:
             </p>
 
             <ul className="mt-4 space-y-2 text-lg">
@@ -69,10 +77,7 @@ export default function AboutMe() {
                 </li>
             </ul>
 
-            <p className="text-lg font-serif text-gray-800 leading-relaxed mt-6">
-                I will keep enhancing <strong>BudgetBuddy</strong> with more features to make personal finance tracking seamless.
-                Thank you for using this app, and I hope it helps you achieve financial clarity!
-            </p>
+            Thank you for using BudgetBuddy! <p className="text-lg font-semibold text-gray-900 mt-2">Happy budgeting! 🎯</p>
 
             <p className="text-lg font-serif text-gray-800 leading-relaxed mt-4">
                 <strong className="block font-semibold">Best Regards,</strong>
@@ -80,5 +85,5 @@ export default function AboutMe() {
                 <strong className="block text-gray-900 font-bold text-xl">Sukrut Mayekar</strong>
             </p>
         </div>
-    );  
+    );
 }

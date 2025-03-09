@@ -7,7 +7,6 @@ export default function Alert(props) {
     }
 
     // reset Alert
-    // const [] = useState(null)
     const alertClosureStatus = (value) => {
         props.alertClosureStatus(value)
     }
@@ -20,7 +19,7 @@ export default function Alert(props) {
                 {props.alert && <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
                     <strong>{capitalizeAlertType(props.alert.type)} !!</strong> {props.alert.message}
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true" onClick={() => {alertClosureStatus("reset alert")}}>&times;</span>
+                        <span aria-hidden="true" onClick={() => {alertClosureStatus("null")}}>&times;</span>
                     </button>
                 </div>}
             </div>

@@ -58,12 +58,12 @@ export default function ExpenseTracker(props) {
     if (fetchedDate.activeDate && fetchedDate.activeDateType) {
       const currentFilteredExpenses = filteredExpenses(fetchedDate.activeDate, fetchedDate.activeDateType)
       const isExpenseApplicableInFilter = currentFilteredExpenses.some(
-        (expense) => {
-          expense.expenseDate === formattedDetails.expenseDate
-        })
+        (expense) => expense.expenseDate === formattedDetails.expenseDate) // implicit return
+
       if (!isExpenseApplicableInFilter) {
         showAlert("warning", "New expense added but it's outside the current filter. Please clear filter to view all expenses.")
       }
+      // console.log(isExpenseApplicableInFilter)
     }
   };
 
@@ -168,16 +168,16 @@ export default function ExpenseTracker(props) {
         );
 
         // Log the parsed dates for debugging
-        console.log("First Date Object:", firstDate);
-        console.log("Last Date Object:", lastDate);
-        console.log("Expense Date Object:", expenseDateObj);
+        // console.log("First Date Object:", firstDate);
+        // console.log("Last Date Object:", lastDate);
+        // console.log("Expense Date Object:", expenseDateObj);
 
         // Check if the expense date falls within the range
         if (expenseDateObj >= firstDate && expenseDateObj <= lastDate) {
-          console.log("Expense within week range:", expense);
+          // console.log("Expense within week range:", expense);
           return expense;
         } else {
-          console.log("Expense outside week range:", expense);
+          // console.log("Expense outside week range:", expense);
         }
       } else if (fetchedDateType === "month") {
         // Parse fetchedDate as month index and get corresponding month name
@@ -270,8 +270,8 @@ export default function ExpenseTracker(props) {
   return (
     <>
       <div className="container my-3">
-        <Alert style = {{marginBottom: 50}} alert={alert} alertClosureStatus = {alertClosureStatus}/>
-        <h3 className="heading my-3" style={{marginTop: 50}} align="center">
+        <Alert alert={alert} alertClosureStatus = {alertClosureStatus}/>
+        <h3 className="heading my-3" align="center">
           {props.expenseTrackerHeading}
         </h3>
         <form>
@@ -368,7 +368,7 @@ export default function ExpenseTracker(props) {
               // Case 2a: Filter applied and matching results found
               <ol className="expense-list" style={{ textAlign: "left", paddingLeft: "0" }}>
                 {filteredExpenses(fetchedDate.activeDate, fetchedDate.activeDateType).map((expense, index) => (
-                  <li className="expenseItem my-4 ml-2" key={index}>
+                  <li className="expenseItem my-4 ml-3" key={index}>
                     {/* Expense Name & Date */}
                     <div className="container-fluid d-flex justify-content-between align-items-center mt-2 text-start">
                       <span className="text-break">{expense.expenseName}</span>
@@ -410,7 +410,7 @@ export default function ExpenseTracker(props) {
             // Case 3: No filter applied, show all expenses
             <ol className="expense-list" style={{ textAlign: "left", paddingLeft: "0" }}>
               {expenseListArrayContents.map((expense, index) => (
-                <li className="expenseItem my-4 ml-2" key={index}>
+                <li className="expenseItem my-4 ml-3" key={index}>
                   {/* Expense Name & Date */}
                   <div className="container-fluid d-flex justify-content-between align-items-center mt-2 text-start">
                     <span className="text-break">{expense.expenseName}</span>
