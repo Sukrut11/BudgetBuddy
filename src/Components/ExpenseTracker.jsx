@@ -77,10 +77,15 @@ export default function ExpenseTracker(props) {
 
   // Function to remove latest expense from the array
   const removeLatestExpense = () => {
-    updateExpenseListArrayContents((prevContentsOfArray) =>
-      prevContentsOfArray.slice(0, -1)
-    );
-    showAlert("success", "Your latest expense has been removed.")
+    if(expenseListArrayContents.length > 0){
+      updateExpenseListArrayContents((prevContentsOfArray) =>
+        prevContentsOfArray.slice(0, -1)
+      );
+      showAlert("success", "Your latest expense has been removed.")
+    }
+    else{
+      return
+    }
   };
 
   // Remove particular expense from list
@@ -208,8 +213,12 @@ export default function ExpenseTracker(props) {
   };
 
   const clearFilterValues = () => {
-    if (fetchedDate.activeDate || fetchedDate.activeDateType) {
+    if (fetchedDate.activeDate === "" && fetchedDate.activeDateType === "") {
+      return
+    }
+    else{
       setFetchedDate({ activeDateType: "", activeDate: "" });
+      showAlert("success", "Date filter has been cleared.")
     }
   };
 
@@ -352,7 +361,6 @@ export default function ExpenseTracker(props) {
             onClick={(event) => {
               event.preventDefault();
               clearFilterValues();
-              showAlert("success", "Date filter has been cleared.")
             }}
           >
             Clear Filter
