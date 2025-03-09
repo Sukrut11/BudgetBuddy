@@ -4,6 +4,7 @@ import ExpenseTracker from "./Components/ExpenseTracker.jsx";
 import AboutMe from "./Components/AboutMe.jsx";
 import './App.css'
 import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react"
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/home" element={<ExpenseTracker expenseTrackerHeading = "BudgetBuddy – Spend Smart, Save Big!"/>} />
           <Route path = "/aboutme" element = {<AboutMe />}/>
         </Routes>
+        <Analytics />
       </Router>
     </>
   );
