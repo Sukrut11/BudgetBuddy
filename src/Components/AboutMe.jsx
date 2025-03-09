@@ -34,7 +34,7 @@ export default function AboutMe() {
 
             <h2 className="text-xl font-semibold mt-6">Viewing Your Expenses</h2>
             <ul className="list-disc list-inside text-lg text-gray-700 leading-relaxed">
-                <li>All expenses are displayed in a chronological order.</li>
+                <li>All expenses are displayed in a numerical order.</li>
                 <li>The date of the expense is mentioned alongside each entry.</li>
                 <li>The amount is displayed in bold for better visibility.</li>
                 <li>Each expense has a color-coded category label.</li>
