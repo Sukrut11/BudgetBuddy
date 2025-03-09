@@ -5,6 +5,8 @@ import AboutMe from "./Components/AboutMe.jsx";
 import './App.css'
 import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from '@vercel/speed-insights/react';
+
 
 export default function App() {
   return (
@@ -17,6 +19,7 @@ export default function App() {
           <Route path = "/aboutme" element = {<AboutMe />}/>
         </Routes>
         <Analytics />
+        <SpeedInsights />
       </Router>
     </>
   );
