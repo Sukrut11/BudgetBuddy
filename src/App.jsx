@@ -12,8 +12,8 @@ export default function App() {
       <Router>
         <Navbar navbarTitle="BudgetBuddy" firstNavComponent="Home" secondNavComponent="About Me" />
         <Routes>
-          <Route path="/" element={<ExpenseTracker expenseTrackerHeading = "BudgetBuddy – Spend Smart, Save Big!"/>}/>
-          <Route path="/home" element={<ExpenseTracker expenseTrackerHeading = "BudgetBuddy – Spend Smart, Save Big!"/>} />
+          <Route path="/" element={<ExpenseTracker expenseTrackerHeading = "Spend Smart, Save Big !!"/>}/>
+          <Route path="/home" element={<ExpenseTracker expenseTrackerHeading = "Spend Smart, Save Big !!"/>} />
           <Route path = "/aboutme" element = {<AboutMe />}/>
         </Routes>
         <Analytics />
