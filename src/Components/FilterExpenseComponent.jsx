@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export default function FilterExpenseComponent(props) {
   // Logic to populate weeks
@@ -48,8 +48,9 @@ export default function FilterExpenseComponent(props) {
 
   // Logic to populate Years
   const yearsForFilterSelection = () => {
-    const startYear = 2000;
-    const endYear = 2100;
+    const presentYear = new Date().getFullYear();
+    const startYear = presentYear - 5;
+    const endYear = presentYear;
 
     let currentYear = startYear;
     const years = [];
